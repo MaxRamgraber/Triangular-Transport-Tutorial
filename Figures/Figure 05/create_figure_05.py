@@ -243,8 +243,6 @@ plt.gca().text(1.16, 0.65, '$\mathit{\mathbf{S}}^{-1}(\it{\mathbf{z}})$', transf
 plt.gca().text(1.16, 0.35, '$\mathit{\mathbf{S}}(\it{\mathbf{x}})$', transform=plt.gca().transAxes, fontsize=largersize,
         verticalalignment='center',horizontalalignment='center',color='xkcd:dark grey')
 
-
-
 # Second subplot: target distribution -----------------------------------------
 plt.subplot(gs[1])
 
@@ -284,19 +282,6 @@ plt.tick_params(left=False,
                 bottom=False,
                 labelleft=False,
                 labelbottom=False)
-
-# # Store the results for future use
-# result_dictionary = {
-#     "ret"           : copy.copy(ret),
-#     "norm_samples"  : copy.copy(norm_samples),
-#     "colors"        : color_values_directional,
-#     "x"             : copy.copy(x),
-#     "y"             : copy.copy(y),
-#     "z"             : copy.copy(z),
-#     "x2"            : copy.copy(x2),
-#     "y2"            : copy.copy(y2),
-#     "z2"            : copy.copy(z2)}
-# pickle.dump(result_dictionary,open("map_example_spiral_distribution_results.p","wb"))
 
 # Save the figure, declare victory. Have a coffee. ----------------------------
 plt.savefig('spiral_density_map_example'+addendum+'.png',dpi=600,bbox_inches='tight')
