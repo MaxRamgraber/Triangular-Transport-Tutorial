@@ -29,11 +29,6 @@ def prior_pdf(x):
     
     pdf     = np.zeros(x.shape)
     
-    # pdf     = scipy.stats.norm.pdf(loc=0.2,scale=0.05,x=x)
-    # pdf     += scipy.stats.norm.pdf(loc=0.5,scale=0.05,x=x)
-    # pdf     += scipy.stats.norm.pdf(loc=0.8,scale=0.25,x=x)
-    
-    
     pdf     = scipy.stats.beta.pdf(a = 15, b = 7, x = x)
     pdf     += scipy.stats.beta.pdf(a = 3, b = 8, x = x)
     
@@ -52,10 +47,7 @@ gs  = GridSpec(
 x   = np.linspace(0,1,101)
 y   = prior_pdf(x)
 
-
-
 #%%
-
 
 gs2 = gs[0].subgridspec(
     nrows   = 2,
@@ -80,8 +72,6 @@ plt.xlim(plt.gca().get_xlim()[0],0)
 plt.gca().xaxis.set_label_position('top') 
 plt.ylabel("prior $p(a)$",color=vcolor,fontsize=14)
 
-
-
 plt.ylim([0,1])
 
 # Calculate the joint density
@@ -96,11 +86,7 @@ Z       = np.zeros(X.shape)
 for row in range(resolution):
     Z[row,:]    = prior_pdf(Y[row,0])
 for row in range(resolution):
-    # Z[:,col]    *= scipy.stats.norm.pdf(np.linspace(0,1,resolution),loc=X[0,col]**2,scale=0.075)
     Z[row,:]    *= scipy.stats.norm.pdf(X[row,:],loc=fun(Y[row,0]),scale=0.075)
-    
-    
-    
     
 plt.subplot(gs2[0,1])
 plt.contour(X,Y,Z,cmap=cmap)
@@ -126,9 +112,7 @@ def hslice(y):
     return
 
 hslice(0.2)
-# hslice(0.625)
 hslice(0.7)
-# hslice(0.775)
 
 plt.xlim(xlims[0],xlims[1])
 plt.ylim(ylims[0],ylims[1])
@@ -156,7 +140,6 @@ plt.text(
     fontsize = 14,
     color = hcolor)
 
-
 plt.text(
     x   = 0.7,
     y   = 0.5,
@@ -167,11 +150,7 @@ plt.text(
     fontsize = 14,
     color = "xkcd:grey")
 
-# plt.title("$\mathbf{joint}$ $\mathbf{distribution}$")
-
 plt.title("joint distribution $p(a,b)$", fontsize = 14)
-
-
 
 
 plt.subplot(gs2[1,1])
@@ -191,26 +170,7 @@ plt.ylim(plt.gca().get_ylim()[-1],0)
 plt.gca().set_xticks([])
 plt.gca().set_yticks([])
 
-# plt.text(
-#     x   = 0.1,
-#     y   = 0.25,
-#     s   = "$p(b)$",
-#     transform = plt.gca().transAxes,
-#     ha = "center",
-#     va = "center",
-#     fontsize = 14,
-#     color = hcolor)
-
-
 plt.xlabel("marginal $p(b)$",color=hcolor,fontsize=14)
-# plt.gca().yaxis.set_label_position('right') 
-# plt.ylabel("$p(b)$",color=hcolor,fontsize=14)
-
-
-
-
-
-
 
 #%%
 
@@ -234,20 +194,7 @@ plt.gca().set_yticks([])
 plt.ylim(0,1)
 plt.xlim(plt.gca().get_xlim()[0],0)
 
-
 plt.ylabel("prior $p(a)$",color=vcolor,fontsize=14)
-
-# plt.gca().annotate('', xy=(-0.5,0.5), xycoords='axes fraction', xytext=(-3.25,0.5), 
-#             arrowprops=dict(arrowstyle = '->',color='xkcd:grey',lw=2.))
-
-# plt.text(
-#     x   = -1.75,
-#     y   = 0.5,
-#     s   = "conditioning \n $p(a,b)$",
-#     transform = plt.gca().transAxes,
-#     ha = "center",
-#     va = "center",
-#     fontsize = 14)
 
 plt.ylim([0,1])
     
@@ -313,8 +260,6 @@ plt.text(
 plt.title("joint distribution $p(a,b)$", fontsize = 14)
 
 
-
-
 plt.subplot(gs3[1,1])
 
 x2  = np.linspace(-0.75,0.75,resolution)
@@ -333,16 +278,6 @@ plt.gca().set_xticks([])
 plt.gca().set_yticks([])
 
 plt.xlabel("marginal $p(b)$",color=hcolor,fontsize=14)
-
-# plt.text(
-#     x   = 0.1,
-#     y   = 0.25,
-#     s   = "$p(b)$",
-#     transform = plt.gca().transAxes,
-#     ha = "center",
-#     va = "center",
-#     fontsize = 14,
-#     color = hcolor)
 
 plt.savefig('bayes_theorem.png',dpi=600,bbox_inches='tight')
 plt.savefig('bayes_theorem.pdf',dpi=600,bbox_inches='tight')
