@@ -144,11 +144,6 @@ def GaussQuadrature(f, a, b, order = 100, args = None, Ws = None, xis = None,
                         
                         result  += lim_dif*0.5*(Ws[i]*funcres)
                         
-                        
-                        
-                        
-                        
-                
                 # If the function output has one dimension more than its
                 # corresponding input
                 elif len(funcres.shape) == len(lim_dif.shape)+1:
@@ -168,21 +163,6 @@ def GaussQuadrature(f, a, b, order = 100, args = None, Ws = None, xis = None,
                             'i,ij->ij',
                             lim_dif*0.5*Ws[i],
                             funcres)
-                
-                    # # result  = lim_dif*0.5*(Ws[0]*funcres)
-                    # result  = np.moveaxis(
-                    #     lim_dif*0.5*Ws[0]*np.moveaxis(
-                    #         funcres,-1,0),0,-1)
-                    
-                    # for i in np.arange(1,len(Ws)):
-                        
-                    #     funcres     = f(
-                    #         lim_dif*0.5*xis[i] + lim_sum*0.5,
-                    #         *args)
-                        
-                    #     result  += np.moveaxis(
-                    #     lim_dif*0.5*Ws[i]*np.moveaxis(
-                    #         funcres,-1,0),0,-1)
                         
                 # If the function output has one dimension more than its
                 # corresponding input
@@ -322,11 +302,6 @@ Z2  = GaussQuadrature(
 Z2  -= np.min(Z2)
 Z2  /= np.max(Z2)
 
-# Z3  = GaussQuadrature(
-#     f               = f2,
-#     a               = 0,
-#     b               = XY[:,1])*15 + 56.7*XY[:,0]**4 - 140.2*XY[:,0]**3 + 67.75*XY[:,0]**2 - 13.6*XY[:,0]
-
 Z3  = GaussQuadrature(
     f               = f2,
     a               = 0,
@@ -339,14 +314,6 @@ Z2norm  = copy.copy(Z2)
 Z2norm  -= np.min(Z2norm)
 Z2norm  /= np.max(Z2norm)
 
-
-# cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", 
-#     ["xkcd:cerulean",
-#       "xkcd:grass green",
-#       "xkcd:goldenrod",
-#       "xkcd:orangish red"])
-
-
 cmap = matplotlib.cm.get_cmap('turbo')
 
 cmap1 = matplotlib.colors.LinearSegmentedColormap.from_list("", 
@@ -356,8 +323,6 @@ cmap1 = matplotlib.colors.LinearSegmentedColormap.from_list("",
 cmap2 = matplotlib.colors.LinearSegmentedColormap.from_list("", 
     ["xkcd:sky blue",
      "xkcd:cerulean"])
-
-
 
 plt.figure(figsize=(10,10))
 
@@ -387,10 +352,6 @@ plt.plot([0,x[50]+0.0075],[y[50]+0.01,y[50]+0.01],zorder=-2,color='xkcd:grey',la
 plt.arrow(x[50]+0.0075,y[50]+0.0075,0,-y[50]+0.0375,zorder=-1,head_width = 0.02,ec='xkcd:grey',fc='xkcd:grey',width=0.005)
 
 plt.title("$\mathbf{A}:$ monotone function", loc = "left")
-
-
-
-
 
 plt.subplot(gs[0,1])
 x   = np.linspace(0,1,101)
@@ -431,15 +392,8 @@ plt.gca().text(0.675, 0.1, '$\mathbf{?}$', transform=plt.gca().transAxes, fontsi
 
 plt.title("$\mathbf{B}:$ nonmonotone function", loc = "left")
 
-
-
-
-
-
-
 plt.subplot(gs[1,0])
 ax  = plt.gca()
-# cm1 = plt.contour(X,Y,Z2.reshape((resolution,resolution)),31,cmap='Greys',vmin = np.min(Z2) - (np.max(Z2)-np.min(Z2))*0.2)
 cm2 = plt.contourf(X,Y,Z1.reshape((resolution,resolution)),31,cmap=cmap,vmin = np.min(Z1) - (np.max(Z1)-np.min(Z1))*0.2)
 plt.axis('equal')
 plt.xlabel('dimension $x_1$', labelpad=-15)
@@ -473,15 +427,9 @@ plt.text(
     rotation = 90,
     transform = plt.gca().transAxes)
 
-
-
-
-
-
 plt.subplot(gs[1,1])
 ax  = plt.gca()
 cm1 = plt.contourf(X,Y,Z2.reshape((resolution,resolution)),31,cmap=cmap,vmin = np.min(Z2) - (np.max(Z2)-np.min(Z2))*0.2)
-# cm2 = plt.contour(X,Y,Z1.reshape((resolution,resolution)),31,cmap=cmap)
 plt.axis('equal')
 plt.xlabel('dimension $x_1$', labelpad=-15)
 plt.ylabel('dimension $x_2$', labelpad=-15)
@@ -514,110 +462,6 @@ plt.text(
     rotation = 90,
     transform = plt.gca().transAxes)
 
-
-
 # Save the figure
 plt.savefig('monotonicity.png',dpi=600,bbox_inches='tight')
 plt.savefig('monotonicity.pdf',dpi=600,bbox_inches='tight')
-
-
-
-
-
-
-# plt.fill(
-#     [0.,0.33,0.33,0.66,0.66,0.],
-#     [0.466,0.466,0.,0.,0.5335,0.5335],
-#     color = cmap(y[36]),
-#     alpha = 0.25,
-#     edgecolor = "None",
-#     zorder = -3)
-
-raise Exception
-
-# plt.subplot(gs[:,1])
-# ax  = plt.gca()
-# cm1 = plt.contour(X,Y,Z2.reshape((resolution,resolution)),31,cmap='Greys')
-# cm2 = plt.contour(X,Y,Z3.reshape((resolution,resolution)),31,cmap='jet')
-# plt.axis('equal')
-# plt.xlabel('dimension $x_1$', labelpad=-10)
-# plt.ylabel('dimension $x_2$', labelpad=-10)
-# ax.set_xticks([0,1])
-# ax.set_xticklabels(['-','+'])
-# ax.set_yticks([0,1])
-# ax.set_yticklabels(['-','+'])
-
-# from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-
-# axins1 = inset_axes(ax,
-#     width="5%",  # width = 5% of parent_bbox width
-#     height="100%",  # height : 50%
-#     loc='lower left',
-#     bbox_to_anchor=(1.01, 0., 1, 1),
-#     bbox_transform=ax.transAxes,
-#     borderpad=0,
-#     )
-# cb1 = plt.gcf().colorbar(cm1, cax=axins1, ticks=[0,1])
-# axins1.set_yticklabels(['-','+'])
-# cb1.set_label("$S^{2}(x_1,x_2)$, monotone in $x_2$", labelpad=-10)
-
-# axins2 = inset_axes(ax,
-#     width="100%",  # width = 5% of parent_bbox width
-#     height="5%",  # height : 50%
-#     loc='lower left',
-#     bbox_to_anchor=(0., 1.01, 1, 1),
-#     bbox_transform=ax.transAxes,
-#     borderpad=0,
-#     )
-# cb2 = plt.gcf().colorbar(cm2, cax=axins2, ticks=[0,1],orientation='horizontal')
-# axins2.xaxis.set_ticks_position('top')
-# axins2.xaxis.set_label_position('top')
-# axins2.set_xticklabels(['-','+'])
-# cb2.set_label("$S^{1}(x_1,x_2)$, monotone in $x_1$", labelpad=-10)
-
-
-plt.subplot(gs[:,1])
-ax  = plt.gca()
-cm1 = plt.contour(X,Y,Z2.reshape((resolution,resolution)),31,cmap='Greys',vmin = np.min(Z2) - (np.max(Z2)-np.min(Z2))*0.2)
-cm2 = plt.contour(X,Y,Z1.reshape((resolution,resolution)),31,cmap=cmap)
-plt.axis('equal')
-plt.xlabel('dimension $x_1$', labelpad=-15)
-plt.ylabel('dimension $x_2$', labelpad=-15)
-ax.set_xticks([0,1])
-ax.set_xticklabels(['-','+'])
-ax.set_yticks([0,1])
-ax.set_yticklabels(['-','+'])
-# plt.ylabel('dimension $y$')
-# plt.axis('off')
-
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
-
-axins1 = inset_axes(ax,
-    width="5%",  # width = 5% of parent_bbox width
-    height="100%",  # height : 50%
-    loc='lower left',
-    bbox_to_anchor=(1.01, 0.5, 1, 0.5),
-    bbox_transform=ax.transAxes,
-    borderpad=0,
-    )
-cb1 = plt.gcf().colorbar(cm1, cax=axins1, ticks=[0,1])
-axins1.set_yticklabels(['-','+'])
-cb1.set_label("$S_{2}(x_1,x_2)$, monotone in $x_2$", labelpad=-10)
-
-axins2 = inset_axes(ax,
-    width="100%",  # width = 5% of parent_bbox width
-    height="5%",  # height : 50%
-    loc='lower left',
-    bbox_to_anchor=(0.5, 1.01, 0.5, 1),
-    bbox_transform=ax.transAxes,
-    borderpad=0,
-    )
-cb2 = plt.gcf().colorbar(cm2, cax=axins2, ticks=[0,1],orientation='horizontal')
-axins2.xaxis.set_ticks_position('top')
-axins2.xaxis.set_label_position('top')
-axins2.set_xticklabels(['-','+'])
-cb2.set_label("$S_{1}(x_1)$, monotone in $x_1$", labelpad=-10)
-
-# Save the figure
-plt.savefig('monotonicity_1D_and_2D_v2.png',dpi=600,bbox_inches='tight')
-plt.savefig('monotonicity_1D_and_2D_v2.pdf',dpi=600,bbox_inches='tight')
