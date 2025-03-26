@@ -21,8 +21,6 @@ f_Y(y) = f_X(x) |  1/(d/(dy)*g(y)) |
 
 """
 
-
-
 y       = np.linspace(-2,2,1001)**3 + np.linspace(-2,2,1001)/2
 x       = np.linspace(-2,2,1001)
 
@@ -124,7 +122,6 @@ plt.ylim(0,np.max(target)*1.1)
 plt.xlim(-2,2)
 
 
-
 plt.gca().invert_yaxis()
 
 # Remove all axis ticks
@@ -132,8 +129,6 @@ plt.tick_params(left=False,
                 bottom=False,
                 labelleft=False,
                 labelbottom=False)
-
-
 
 
 plt.gca().text(0.415, 1.025, '$\pi$', transform=plt.gca().transAxes, fontsize=16,
@@ -144,7 +139,6 @@ plt.gca().text(0.45, 1.025, '$ ($ \,$)$', transform=plt.gca().transAxes, fontsiz
 
 plt.gca().text(0.4625, 1.025, '$\mathbf{x}$', transform=plt.gca().transAxes, fontsize=16,
         verticalalignment='bottom',horizontalalignment='left',color='xkcd:orangish red')
-
 
 
 plt.gca().invert_yaxis()
@@ -247,9 +241,6 @@ plt.gca().text(0.535, 1.025, '$\mathbf{z}$', transform=plt.gca().transAxes, font
         verticalalignment='bottom',horizontalalignment='left',color='xkcd:grass green')
 
 
-
-
-
 #%%
 
 # Second subplot: density map
@@ -336,8 +327,6 @@ plt.tick_params(left=False,
                 bottom=False,
                 labelleft=False,
                 labelbottom=False)
-
-
 
 plt.gca().text(0.175, 1.012, '$\mathbf{z}$', transform=plt.gca().transAxes, fontsize=10,
         verticalalignment='bottom',horizontalalignment='left',color='xkcd:grass green')
