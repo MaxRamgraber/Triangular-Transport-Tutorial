@@ -151,10 +151,6 @@ def GaussQuadrature(f, a, b, order = 100, args = None, Ws = None, xis = None,
                         
                         result  += lim_dif*0.5*(Ws[i]*funcres)
                         
-                        
-                        
-                        
-                        
                 
                 # If the function output has one dimension more than its
                 # corresponding input
@@ -175,21 +171,6 @@ def GaussQuadrature(f, a, b, order = 100, args = None, Ws = None, xis = None,
                             'i,ij->ij',
                             lim_dif*0.5*Ws[i],
                             funcres)
-                
-                    # # result  = lim_dif*0.5*(Ws[0]*funcres)
-                    # result  = np.moveaxis(
-                    #     lim_dif*0.5*Ws[0]*np.moveaxis(
-                    #         funcres,-1,0),0,-1)
-                    
-                    # for i in np.arange(1,len(Ws)):
-                        
-                    #     funcres     = f(
-                    #         lim_dif*0.5*xis[i] + lim_sum*0.5,
-                    #         *args)
-                        
-                    #     result  += np.moveaxis(
-                    #     lim_dif*0.5*Ws[i]*np.moveaxis(
-                    #         funcres,-1,0),0,-1)
                         
                 # If the function output has one dimension more than its
                 # corresponding input
@@ -292,11 +273,9 @@ gs = GridSpec(
 
 # Create some nonmonotone function
 def f1(x):
-    #return scipy.stats.norm.pdf(x=x,loc=0.25,scale=0.1) + scipy.stats.norm.pdf(x=x,loc=0.75,scale=0.1)
     return 0.2*x**4 - 4*x**3 + 4*x
 
 def expf1(x):
-    #return scipy.stats.norm.pdf(x=x,loc=0.25,scale=0.1) + scipy.stats.norm.pdf(x=x,loc=0.75,scale=0.1)
     return np.exp(f1(x))
 
 
@@ -330,7 +309,6 @@ plt.gca().set_yticklabels(["0","1","2","3"])
 plt.xlabel("$x$")
 plt.gca().set_xticks([])
 plt.gca().set_xticklabels([])
-# plt.gca().tick_params(axis="y",direction="in", pad=-22)
 
 # -----------------------------------------------------------------------------
 # Arrow right
@@ -353,19 +331,6 @@ for k in range(101):
         
 plt.gca().annotate('', xy=(xp+0.08, 0.5), xycoords='axes fraction', xytext=(xp+0.08-0.001, 0.5), 
                     arrowprops=dict(color=col,headlength=20,headwidth=35,width=1),)
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 # =============================================================================
 # Plot the rectified function
@@ -403,10 +368,6 @@ for k in range(101):
         plt.gca().annotate('', xy=(xp, 0.45), xycoords='axes fraction', xytext=(xp,0.55), 
                             arrowprops=dict(color=col,headlength=1,headwidth=0,width=1),zorder=-1)
         
-        
-        # plt.gca().annotate('', xy=(0.42, yp), xycoords='axes fraction', xytext=(0.48, yp), 
-        #                     arrowprops=dict(color=col,headlength=1,headwidth=0,width=1))
-        
 plt.gca().annotate('', xy=(xp+0.08, 0.5), xycoords='axes fraction', xytext=(xp+0.08-0.001, 0.5), 
                     arrowprops=dict(color=col,headlength=20,headwidth=35,width=1),)
 
@@ -426,14 +387,10 @@ for i in range(len(x)-1):
 plt.ylabel('nonmonotone $\hat{g}(x)$')
 plt.gca().set_yticks([-1.,0.,1.])
 plt.gca().set_yticklabels(["-1","0","1"])
-# plt.gca().tick_params(axis="y",direction="in", pad=-22)
 
 plt.xlabel("$x$")
 plt.gca().set_xticks([])
 plt.gca().set_xticklabels([])
     
-
-
-
-plt.savefig('integrated_rectifier_v3.png',dpi=600,bbox_inches='tight')
-plt.savefig('integrated_rectifier_v3.pdf',dpi=600,bbox_inches='tight')
+plt.savefig('integrated_rectifier.png',dpi=600,bbox_inches='tight')
+plt.savefig('integrated_rectifier.pdf',dpi=600,bbox_inches='tight')
